@@ -45,8 +45,22 @@ document.addEventListener("DOMContentLoaded", () => {
   signupForm.addEventListener("submit", async (event) => {
     event.preventDefault();
 
-    const email = document.getElementById("email").value;
+    const email = document.getElementById("email").value.trim();
     const activity = document.getElementById("activity").value;
+
+    if (!email) {
+      messageDiv.textContent = "Please enter your email.";
+      messageDiv.className = "error";
+      messageDiv.classList.remove("hidden");
+      return;
+    }
+
+    if (!activity) {
+      messageDiv.textContent = "Please select an activity.";
+      messageDiv.className = "error";
+      messageDiv.classList.remove("hidden");
+      return;
+    }
 
     try {
       const response = await fetch(
